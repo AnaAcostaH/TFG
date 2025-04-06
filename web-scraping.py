@@ -106,7 +106,7 @@ def main():
                 all_data.extend(data)
             if all_data:
                 df = pd.DataFrame(all_data)
-                super = "C:/Users/Usuario/Documentos/TFG/" + supermercado + "_productos.csv"
+                super = "C:/Users/Usuario/Documentos/TFG/CSV/" + supermercado + "_productos.csv"
                 df.to_csv(super, index=False)
     finally:
         driver.quit()
