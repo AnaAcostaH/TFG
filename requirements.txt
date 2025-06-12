@@ -1,0 +1,6 @@
+selenium
+pandas
+unidecode
+chromadb
+gradio
+sentence-transformers
