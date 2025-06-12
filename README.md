@@ -1,4 +1,4 @@
-# 🛒 Comparador de precios entre supermercados
+# 🛒 Aplicación para la extracción, vectorización y análisis semántico de precios de supermercados en Python
 
 Este proyecto permite comparar los precios de productos en **Mercadona**, **Alcampo** y **Ahorramás** mediante procesamiento semántico con embeddings y una interfaz de usuario.
 
@@ -92,8 +92,15 @@ Se utiliza el modelo all-MiniLM-L6-v2 de sentence-transformers para vectorizar l
    - huevos camperos → picos camperos de jerez hacendado (0.99€)
    - jamon serrano → pate de jamon hacendado (1.1€)
 
-✅ Ahorramás → 3.81€
-✅ Alcampo → 7.44€
+✅ Ahorramás → 3.81€ (3/3 productos encontrados)
+   - leche entera → leche rio 1l entera (0.96€)
+   - huevos camperos → huevos de codorniz 18u (1.85€)
+   - jamon serrano → jamon cocido campofrio 75gr (1.0€)
+
+✅ Alcampo → 7.44€ (3/3 productos encontrados)
+   - leche entera → l.r. leche de vaca entera 1l. (0.94€)
+   - huevos camperos → valor barritas huesitos combix leche (2.46€)
+   - jamon serrano → jamon curado campofrio (4.04€)
 
 ---
 
@@ -114,10 +121,11 @@ Se utiliza el modelo all-MiniLM-L6-v2 de sentence-transformers para vectorizar l
 ## 📦 Requisitos (requirements.txt)
 
 ```txt
+selenium
+pandas
 chromadb
 sentence-transformers
 gradio
-pandas
 ```
 
 ---
@@ -135,6 +143,8 @@ pandas
 
 ![image](https://github.com/user-attachments/assets/3fe2c79a-a9a6-4b4a-9dd6-b0b092e9807e)
 
-
+## 👩🏾‍💻 Autor
+Trabajo de fin de grado en Ingeniería del Software - Ana Acosta Hernández
+  
 ---
 
