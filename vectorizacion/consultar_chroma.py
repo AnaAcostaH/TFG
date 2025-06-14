@@ -104,7 +104,7 @@ def comparar_lista_de_la_compra(productos_input: str, k_por_producto: int = 30):
             if nombre_encontrado:
                 print(f"   - {entrada_usuario} → {nombre_encontrado} ({precio}€)")
             else:
-                print(f"   - {entrada_usuario} → ❌ No encontrado")
+                print(f"   - {entrada_usuario} → No encontrado")
 
     # Mostrar solo el supermercado más barato
     disponibles = [(s, t) for s, t in totales.items() if t != float("inf")]

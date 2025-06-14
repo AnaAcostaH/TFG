@@ -17,7 +17,7 @@ while True:
         print("👋 ¡Hasta pronto!")
         break
 
-    if "," in pregunta:
+    if pregunta:
         resultados = comparar_lista_de_la_compra(pregunta, k_por_producto=30)
 
         # Mostrar advertencia si no se encontró nada en ningún supermercado
