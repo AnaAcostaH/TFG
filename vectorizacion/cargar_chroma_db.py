@@ -7,13 +7,13 @@ from sentence_transformers import SentenceTransformer
 # Inicializa cliente local de ChromaDB
 chroma_client = chromadb.PersistentClient(path="./vectorizacion/db")
 
-# Carga modelo de embeddings (puedes elegir otro si quieres)
+# Carga modelo de embeddings (en mi caso all-MiniLM-L6-v2)
 embedding_model = SentenceTransformer("all-MiniLM-L6-v2")
 
-# Crea (o accede a) la colección
+# Crea o accede a la colección de productos
 collection = chroma_client.get_or_create_collection(name="productos")
 
-# Ruta a tus CSVs
+# Ruta a los CSVs de los supermercados
 carpeta_csv = "./data"
 
 def batch(iterable, batch_size=5000):
@@ -33,9 +33,11 @@ for archivo in os.listdir(carpeta_csv):
         textos = df["nombre_limpio"].tolist()
         embeddings = embedding_model.encode(textos).tolist()
 
+        # Asocia metadatos a esos embeddings y crea un id por cada producto
         metadatas = df[["supermercado", "precio", "seccion", "url"]].to_dict(orient="records")
         ids = [f"{archivo}_{i}" for i in range(len(df))]
 
+        # Carga datos por lotes para que vaya más rápido
         for t_batch, e_batch, m_batch, id_batch in zip(
             batch(textos), batch(embeddings), batch(metadatas), batch(ids)
         ):

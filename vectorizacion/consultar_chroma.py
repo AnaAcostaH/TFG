@@ -33,7 +33,7 @@ def consultar_producto(pregunta, k=10):
     productos_limpios = []
     for p in productos:
         try:
-            # Elimina caracteres como €, espacios no estándar, etc.
+            # Elimina caracteres como €, espacios no estándar, etc
             precio_str = re.sub(r"[^\d,\.]", "", str(p["precio"]))
             precio_str = precio_str.replace(",", ".")
             precio_float = float(precio_str)
@@ -62,29 +62,29 @@ def comparar_lista_de_la_compra(productos_input: str, k_por_producto: int = 30):
     totales = {}
     detalles_supermercado = {}
 
-    for supermercado in supermercados:
+    for supermercado in supermercados: # Busca por supermercado
         total = 0.0
         detalles = []
 
-        for producto in productos_lista:
+        for producto in productos_lista: # Y por cada producto dentro del supermercado
             resultados = consultar_producto(producto, k=k_por_producto)
             resultados_super = [
-                r for r in resultados if r["supermercado"].lower() == supermercado
+                r for r in resultados if r["supermercado"].lower() == supermercado # Se queda solo con los resultados del super actual
             ]
 
-            if resultados_super:
+            if resultados_super: # Selecciona el más barato, guarda su info y lo suma al total del precio
                 mejor = min(resultados_super, key=lambda r: r["precio"])
                 detalles.append((producto, mejor["nombre"], mejor["precio"]))
                 total += mejor["precio"]
             else:
                 detalles.append((producto, None, None))
 
-        if any(p[2] is not None for p in detalles):
+        if any(p[2] is not None for p in detalles): # [producto, nombre, precio]
             totales[supermercado] = total
         else:
             totales[supermercado] = float("inf")
 
-        detalles_supermercado[supermercado] = detalles
+        detalles_supermercado[supermercado] = detalles # Guardamos la lista con detalles que se muestra luego
 
     # Ordenar supermercados por total
     supermercados_ordenados = sorted(
@@ -100,6 +100,8 @@ def comparar_lista_de_la_compra(productos_input: str, k_por_producto: int = 30):
             continue
 
         print(f"\n✅ {supermercado.capitalize()} → {round(total, 2)}€ ({encontrados}/{len(productos_lista)} productos encontrados)")
+        
+        # Por cada producto muestra el detalle
         for entrada_usuario, nombre_encontrado, precio in detalles:
             if nombre_encontrado:
                 print(f"   - {entrada_usuario} → {nombre_encontrado} ({precio}€)")
