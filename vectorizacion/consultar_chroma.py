@@ -20,7 +20,7 @@ def consultar_producto(pregunta, k=10):
     )
 
     productos = []
-    for doc, meta in zip(resultados["documents"][0], resultados["metadatas"][0]):
+    for doc, meta in zip(resultados["documents"][0], resultados["metadatas"][0]): # Diccionario por cada nombre con sus metadatos
         productos.append({
             "nombre": doc,
             "precio": meta["precio"],
