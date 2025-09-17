@@ -1,0 +1,9 @@
+# Ignorar bases de datos temporales y archivos generados
+vectorizacion/db/chroma.sqlite3
+data/historico_precios.db
+
+# Ignorar cachés de Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
