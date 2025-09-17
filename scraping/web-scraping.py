@@ -7,6 +7,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from constants.constants import supermercados_config
 from limpieza.normalizacion import limpiar_nombre_producto, limpiar_precio
 from vectorizacion.consultar_chroma import consultar_producto
+from utils.insertar_datos import insertar_datos_en_db
 
 options = webdriver.ChromeOptions()
 options.add_argument("--headless")
@@ -54,6 +55,7 @@ def cargar_todos_los_productos_ahorramas(driver, boton_selector, producto_select
     )
 
 def scrape_supermercado(supermercado, url, selectores, driver):
+    productos = []
     driver.get(url)
     try:
         WebDriverWait(driver, 10).until(
@@ -65,7 +67,6 @@ def scrape_supermercado(supermercado, url, selectores, driver):
         if supermercado == "ahorramas":
             print("Cargando todos los productos en Ahorramas...")
             cargar_todos_los_productos_ahorramas(driver, selectores["boton_mas_resultados"], selectores["producto"])  
-        productos = []
         index = 0
         while True:
             items = driver.find_elements(By.CSS_SELECTOR, selectores["producto"])
@@ -112,6 +113,7 @@ def main():
                 df = pd.DataFrame(all_data)
                 super = "C:/Users/Usuario/Documentos/TFG/data/" + supermercado + "_productos.csv"
                 df.to_csv(super, index=False)
+                insertar_datos_en_db(all_data) #inserta en sqlite después de guardar el csv
     finally:
         driver.quit()
     
